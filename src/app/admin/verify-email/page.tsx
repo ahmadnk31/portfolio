@@ -56,7 +56,7 @@ export default function VerifyEmailPage() {
         
         <Paragraph className="mb-8">
           Before you can send emails through AWS SES, you need to verify your sender email address.
-          Enter the email address you want to use as your sender email address and click "Verify Email".
+          Enter the email address you want to use as your sender email address and click &quot;Verify Email&quot;.
           AWS will send a verification email to this address with instructions to complete the process.
         </Paragraph>
         
@@ -116,7 +116,7 @@ export default function VerifyEmailPage() {
             <h3 className="text-sm font-semibold text-gray-700 mb-2">Important Notes:</h3>
             <ul className="text-sm text-gray-600 space-y-2 list-disc pl-5">
               <li>You must verify both sender and recipient email addresses in sandbox mode</li>
-              <li>Check your spam folder if you don't see the verification email</li>
+              <li>Check your spam folder if you don&apos;t see the verification email</li>
               <li>For production use, request a sending limit increase from AWS</li>
               <li>Update your .env.local file with the verified email address</li>
             </ul>

@@ -21,12 +21,28 @@ export async function POST(req: Request) {
       );
     }
 
+    // Check if email is verified
+    const existingContact = await prisma.contact.findFirst({
+      where: {
+        email,
+        verified: true,
+      },
+    });
+
+    if (!existingContact) {
+      return NextResponse.json(
+        { error: "Please verify your email address first" },
+        { status: 403 }
+      );
+    }
+
     // Save contact message to database
     const contact = await prisma.contact.create({
       data: {
         name,
         email,
         message,
+        verified: true, // This message is from a verified email
       },
     });
 
