@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden container mx-auto px-4 md:px-8 py-16">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
         <div className="md:max-w-xl">
           <span className="text-4xl">👋</span>

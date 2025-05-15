@@ -1,5 +1,5 @@
 "use client";
-import { navlinks } from "@/constants/navlinks";
+import { navlinks, adminLinks } from "@/constants/navlinks";
 import { Navlink } from "@/types/navlink";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { socials } from "@/constants/socials";
 import { Badge } from "./Badge";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconLayoutSidebarRightCollapse, IconMenu2, IconX } from "@tabler/icons-react";
-import { isMobile } from "@/lib/utils";
+import { isAdmin, isMobile } from "@/lib/utils";
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(isMobile() ? false : true);
@@ -166,8 +166,40 @@ export const Navigation = ({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const pathname = usePathname();
+  const [isUserAdmin, setIsUserAdmin] = useState(false);
+  
+  // Check if user is admin on component mount and listen for changes
+  useEffect(() => {
+    // Check admin status
+    const checkAdminStatus = () => {
+      setIsUserAdmin(isAdmin());
+    };
+    
+    // Initial check
+    checkAdminStatus();
+    
+    // Set up a listener to detect login status changes
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'portfolio_admin_key') {
+        checkAdminStatus();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check periodically in case localStorage was modified in the same window
+    const intervalId = setInterval(checkAdminStatus, 2000);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const isActive = (href: string) => pathname === href;
+
+  // Combine regular links and admin links if user is admin
+  const allNavLinks = [...navlinks, ...(isUserAdmin ? adminLinks : [])];
 
   return (
     <div className="flex flex-col space-y-1 my-8 relative z-[100]">
@@ -211,6 +243,52 @@ export const Navigation = ({
           ))}
         </div>
       </div>
+      
+      {/* Admin Navigation - only shown if user is admin */}
+      {isUserAdmin && adminLinks && adminLinks.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xs uppercase text-gray-500 font-medium mb-2 px-3">Admin</h2>
+          <div className="space-y-1">
+            {adminLinks.map((link: Navlink) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => {
+                  if (isMobile()) {
+                    // Just close sidebar, effect will handle the scroll restoration
+                    setOpen(false);
+                  }
+                }}
+                className={twMerge(
+                  "text-gray-700 hover:text-gray-900 hover:bg-gray-100/70 transition-all duration-200 flex items-center space-x-3 py-2.5 px-3 rounded-md text-sm",
+                  isActive(link.href) && "bg-blue-50 text-blue-700 font-medium"
+                )}
+              >
+                {link.icon && (
+                  <link.icon
+                    className={twMerge(
+                      "h-4 w-4 flex-shrink-0",
+                      isActive(link.href) && "text-blue-600"
+                    )}
+                  />
+                )}
+                <span>{link.label}</span>
+                {isActive(link.href) && (
+                  <motion.div
+                    layoutId="sidebar-indicator-admin"
+                    className="absolute left-0 w-1 h-5 bg-blue-600 rounded-r-full"
+                    transition={{
+                      type: "spring",
+                      stiffness: 350,
+                      damping: 30
+                    }}
+                  />
+                )}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="mt-4">
         <h2 className="text-xs uppercase text-gray-500 font-medium mb-2 px-3">Connect</h2>

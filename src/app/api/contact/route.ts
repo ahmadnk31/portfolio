@@ -19,9 +19,7 @@ export async function POST(req: Request) {
         { error: "Please enter a valid email address" },
         { status: 400 }
       );
-    }
-
-    // Check if email is verified
+    }    // Check if email is verified
     const existingContact = await prisma.contact.findFirst({
       where: {
         email,
@@ -35,14 +33,42 @@ export async function POST(req: Request) {
         { status: 403 }
       );
     }
-
-    // Save contact message to database
-    const contact = await prisma.contact.create({
-      data: {
+    
+    // Check if this is a duplicate message submission (might happen from double-clicking)
+    // Only apply this check if the exact same message was submitted in the last 5 minutes
+    const recentlySubmitted = await prisma.contact.findFirst({
+      where: {
+        email,
+        message,
+        createdAt: {
+          gte: new Date(Date.now() - 5 * 60 * 1000) // 5 minutes ago
+        }
+      }
+    });
+    
+    if (recentlySubmitted) {
+      return NextResponse.json({
+        success: true,
+        id: recentlySubmitted.id,
+        duplicateDetected: true,
+        message: "Your message has been already submitted. Thank you!"
+      });
+    }// Update existing verified contact or create a new entry if somehow not found
+    const contact = await prisma.contact.upsert({
+      where: {
+        // Use the ID of the existing contact if available, otherwise fallback to a generated ID
+        id: existingContact ? existingContact.id : 'temp-' + email.replace(/[^a-zA-Z0-9]/g, ''),
+      },
+      update: {
+        name, // Update name in case it changed
+        message, // Update with the new message
+        updatedAt: new Date(), // Force update timestamp
+      },
+      create: {
         name,
         email,
         message,
-        verified: true, // This message is from a verified email
+        verified: true, // This should rarely happen as we already checked for verification
       },
     });
 

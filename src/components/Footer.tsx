@@ -10,6 +10,13 @@ export const Footer = () => {
             <span className="font-medium">&copy; {new Date().getFullYear()} </span>
             &mdash; Designed & Built by Ahmadullah Nekzad with{" "}
             <span className="text-red-500">❤️</span>
+            {" "}|{" "}
+            <a 
+              href="/admin/login"
+              className="text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              Admin
+            </a>
           </p>
         </div>
         

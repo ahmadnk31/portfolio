@@ -4,4 +4,5 @@ export type Navlink = {
   href: string;
   label: string;
   icon?: React.ReactNode | TablerIconsProps | any;
+  adminOnly?: boolean;
 };

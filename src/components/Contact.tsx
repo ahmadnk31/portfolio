@@ -134,6 +134,12 @@ export const Contact = () => {
         throw new Error(data.error || "Failed to send message");
       }
       
+      // If this was detected as a duplicate submission, still show success
+      // but we could potentially show a different message
+      if (data.duplicateDetected) {
+        console.log("Duplicate message detected but handled gracefully");
+      }
+      
       setStatus("success");
       setFormData(defaultFormState);
       setIsVerified(false);

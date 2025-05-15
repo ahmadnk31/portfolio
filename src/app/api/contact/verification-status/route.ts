@@ -5,7 +5,25 @@ import { NextResponse } from 'next/server';
 export async function GET(req: Request) {
   try {
     // This endpoint should be protected in production
-    // Add authentication check here
+    // Simple authentication check - in a real app, you would use a more secure method
+    // like JWT tokens or session cookies
+    const hasAuth = req.headers.get('Authorization');
+    
+    // For client-side validation, check the referer to ensure it's from an admin page
+    const referer = req.headers.get('referer') || '';
+    const isFromAdminPage = referer.includes('/admin/');
+    
+    if (!isFromAdminPage) {
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized access' }),
+        {
+          status: 403,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
     
     // Get all verification attempts
     const pendingVerifications = await prisma.contact.findMany({

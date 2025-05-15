@@ -4,6 +4,7 @@ import {
   IconBriefcase2,
   IconMail,
   IconMessage2,
+  IconDashboard,
 } from "@tabler/icons-react";
 
 export const navlinks = [
@@ -31,5 +32,21 @@ export const navlinks = [
     href: "/contact",
     label: "Contact",
     icon: IconMail,
+  },
+];
+
+export const adminLinks = [
+  {
+    href: "/admin/email-verification",
+    label: "Email Verification",
+    icon: IconDashboard,
+    adminOnly: true,
+  },
+  {
+    href: "/admin/verify-email",
+    label: "Verify Email",
+    // Using IconMail for both since IconMail2 doesn't exist in the package
+    icon: IconMail,
+    adminOnly: true,
   },
 ];
