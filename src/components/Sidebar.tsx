@@ -168,7 +168,7 @@ export const Navigation = ({
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 p-2 rounded-md transition-colors"
-              title={social.name}
+              title={social.label}
             >
               <social.icon className="h-4 w-4" />
             </a>
