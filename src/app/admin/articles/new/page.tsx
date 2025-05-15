@@ -4,6 +4,7 @@ import { Container } from "@/components/Container";
 import { Heading } from "@/components/Heading";
 import React, { useState, useRef } from "react";
 import { IconLoader2, IconCheck, IconAlertTriangle, IconPhoto, IconUpload } from "@tabler/icons-react";
+import Image from "next/image";
 
 export default function NewArticle() {
   const [formData, setFormData] = useState({
@@ -171,13 +172,15 @@ export default function NewArticle() {
               accept="image/*"
               className="hidden"
             />
-            
-            {imagePreview ? (
+              {imagePreview ? (
               <div className="relative">
-                <img 
+                <Image 
                   src={imagePreview} 
                   alt="Preview" 
-                  className="max-h-60 mx-auto rounded"
+                  width={400}
+                  height={240}
+                  className="max-h-60 w-auto mx-auto rounded object-contain"
+                  unoptimized // This is needed for blob/data URLs
                 />
                 <button
                   type="button"
