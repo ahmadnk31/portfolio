@@ -54,9 +54,22 @@ export async function sendEmail({
       },
     },
   };
-
   try {
-    return await sesClient.sendEmail(params);
+    // Verify environment variables are properly loaded
+    if (!process.env.AWS_SES_FROM_EMAIL) {
+      throw new Error('AWS_SES_FROM_EMAIL is not defined in environment variables');
+    }
+    
+    if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+      throw new Error('AWS credentials are not properly configured');
+    }
+    
+    console.log('Attempting to send email from:', process.env.AWS_SES_FROM_EMAIL);
+    console.log('To:', Array.isArray(to) ? to.join(', ') : to);
+    
+    const result = await sesClient.sendEmail(params);
+    console.log('Email sent successfully, message ID:', result.MessageId);
+    return result;
   } catch (error) {
     console.error('Error sending email:', error);
     throw error;

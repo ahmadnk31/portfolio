@@ -9,10 +9,26 @@
 
     html {
         scroll-behavior: smooth;
+        height: -webkit-fill-available;
+        overscroll-behavior-y: none;
     }
 
     body {
         @apply bg-white dark:bg-gray-950;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        overscroll-behavior-y: none;
+        position: relative;
+    }
+
+    /* Mobile scrolling fixes */
+    @media (max-width: 767px) {
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
     }
 }
 

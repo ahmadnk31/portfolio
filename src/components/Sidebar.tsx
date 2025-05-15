@@ -76,7 +76,7 @@ export const Sidebar = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             exit={{ x: -300, opacity: 0 }}
-            className="px-6 z-50 py-8 bg-white dark:bg-gray-900 max-w-[280px] w-full fixed lg:relative h-screen left-0 flex flex-col justify-between shadow-xl lg:shadow-none border-r border-gray-200/70 dark:border-gray-800/70"
+            className="px-6 z-50 py-8 bg-white dark:bg-gray-900 max-w-[280px] w-full fixed lg:relative h-[100dvh] left-0 flex flex-col justify-between shadow-xl lg:shadow-none border-r border-gray-200/70 dark:border-gray-800/70 overflow-y-auto"
           >
             <div className="flex-1 overflow-auto scrollbar-hide">
               <div className="flex justify-between items-center lg:hidden">
@@ -102,8 +102,9 @@ export const Sidebar = () => {
       
       {/* Mobile toggle button */}
       <button
-        className="fixed lg:hidden bottom-6 right-6 h-12 w-12 bg-blue-600 hover:bg-blue-700 text-white shadow-lg rounded-full flex items-center justify-center z-50 transition-colors"
+        className="fixed lg:hidden bottom-6 right-6 h-12 w-12 bg-blue-600 hover:bg-blue-700 text-white shadow-lg rounded-full flex items-center justify-center z-[100] transition-colors"
         onClick={() => setOpen(!open)}
+        style={{ transform: 'translateZ(0)' }}
       >
         {open ? <IconX size={20} /> : <IconMenu2 size={20} />}
       </button>

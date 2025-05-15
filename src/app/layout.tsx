@@ -75,6 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
@@ -87,12 +88,12 @@ export default function RootLayout({
       <body
         className={twMerge(
           inter.className,
-          "flex antialiased h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
+          "flex antialiased min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"
         )}
       >
         <Sidebar />
-        <div className="lg:pl-3 lg:pt-3 bg-transparent flex-1 overflow-y-auto">
-          <div className="flex-1 bg-white/90 min-h-screen lg:rounded-tl-2xl border border-transparent lg:border-gray-200/60 lg:shadow-soft overflow-y-auto backdrop-blur-sm relative">
+        <div className="lg:pl-3 lg:pt-3 bg-transparent flex-1 w-full overflow-y-auto">
+          <div className="flex-1 bg-white/90 min-h-screen w-full lg:rounded-tl-2xl border border-transparent lg:border-gray-200/60 lg:shadow-soft overflow-y-auto backdrop-blur-sm relative">
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-blue-50/40 to-indigo-50/40 rounded-full blur-3xl -z-10 transform translate-x-1/4 -translate-y-1/4"></div>
             <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-blue-50/40 to-purple-50/40 rounded-full blur-3xl -z-10 transform -translate-x-1/4 translate-y-1/4"></div>
