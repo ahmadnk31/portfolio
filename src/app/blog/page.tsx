@@ -12,6 +12,34 @@ export const metadata: Metadata = {
   title: "Articles & Blog | Ahmadullah Nekzad",
   description:
     "Articles and blog posts by Ahmadullah Nekzad about cloud solutions, web development, and other technology topics.",
+  keywords: [
+    'AWS Cloud Architecture', 
+    'Web Development Articles', 
+    'Full-Stack Development Blog', 
+    'Cloud Computing Tips',
+    'Tech Blog',
+    'Programming Insights'
+  ],
+  openGraph: {
+    title: "Articles & Blog | Ahmadullah Nekzad",
+    description: "Articles and blog posts by Ahmadullah Nekzad about cloud solutions, web development, and other technology topics.",
+    url: 'https://ahmadullah.cdev/blog',
+    type: 'website',
+    images: [
+      {
+        url: '/images/blog-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ahmadullah Nekzad Blog'
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Articles & Blog | Ahmadullah Nekzad",
+    description: "Articles and blog posts about cloud solutions, web development, and other technology topics.",
+    images: ['/images/blog-og.jpg'],
+  },
 };
 
 export default async function BlogPage() {

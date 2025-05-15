@@ -12,6 +12,33 @@ export const metadata: Metadata = {
   title: "Contact | Ahmadullah Nekzad",
   description:
     "Get in touch with Ahmadullah Nekzad - AWS Certified Cloud Architect and Full Stack Developer specializing in cloud solutions and web applications.",
+  keywords: [
+    'Contact Ahmadullah Nekzad', 
+    'Hire AWS Cloud Architect', 
+    'Full-Stack Developer Contact', 
+    'Cloud Solutions Consultant',
+    'Web Development Services'
+  ],
+  openGraph: {
+    title: "Contact | Ahmadullah Nekzad",
+    description: "Get in touch with Ahmadullah Nekzad - AWS Certified Cloud Architect and Full Stack Developer specializing in cloud solutions and web applications.",
+    url: 'https://ahmadullah.dev/contact',
+    type: 'website',
+    images: [
+      {
+        url: '/images/ahmadullah.png',
+        width: 800,
+        height: 600,
+        alt: 'Contact Ahmadullah Nekzad'
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Contact Ahmadullah Nekzad",
+    description: "Get in touch for cloud architecture and web development services.",
+    images: ['/images/ahmadullah.png'],
+  },
 };
 
 export default function ContactPage() {
@@ -47,7 +74,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="block text-sm text-gray-500">Email</span>
-                  <span className="font-medium">contact@ahmadullah.com</span>
+                  <span className="font-medium">nikzadahmadullah@gmail.com</span>
                 </div>
               </Link>
             </div>
