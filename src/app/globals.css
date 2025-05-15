@@ -7,43 +7,9 @@
         --header-height: 4rem;
     }
 
-    html {
-        scroll-behavior: smooth;
-        height: -webkit-fill-available;
-        overscroll-behavior-y: none;
-    }
 
-    body {
-        @apply bg-white dark:bg-gray-950;
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
-        overscroll-behavior-y: none;
-        position: relative;
-    }
 
-    /* Mobile scrolling fixes */
-    @media (max-width: 767px) {
 
-        html,
-        body {
-            overflow-x: hidden;
-            width: 100%;
-        }
-    }
-}
-
-/* Modern scrollbar styling */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-track {
-    @apply bg-gray-100 dark:bg-gray-900;
-}
-
-::-webkit-scrollbar-thumb {
-    @apply bg-blue-500/50 rounded-full hover:bg-blue-600/50 transition-colors;
 }
 
 /* Gradient animations */

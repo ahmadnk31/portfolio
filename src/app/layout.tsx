@@ -1,10 +1,12 @@
 import { Sidebar } from "@/components/Sidebar";
 import "./globals.css";
+import "./fix-overflow.css"; // Add the overflow fix CSS
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { twMerge } from "tailwind-merge";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { IOSFix } from "@/components/IOSFix";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://ahmadullahnekzad.com',
+    url: 'https://ahmadullah.dev',
     title: 'Ahmadullah Nekzad - AWS Certified Cloud Architect & Full-Stack Developer',
     description: 'Ahmadullah Nekzad is an AWS certified cloud architect and full-stack developer specializing in scalable web applications and cloud solutions.',
     siteName: 'Ahmadullah Nekzad',
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
     google: 'google-site-verification-code', // Replace with your actual Google verification code when you have it
   },
   alternates: {
-    canonical: 'https://ahmadullahnekzad.com',
+    canonical: 'https://ahmadullah.dev',
   },
 };
 
@@ -75,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
@@ -88,19 +90,17 @@ export default function RootLayout({
       <body
         className={twMerge(
           inter.className,
-          "flex antialiased min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"
+          "flex flex-col lg:flex-row antialiased min-h-[100dvh]  bg-gradient-to-br relative from-gray-50 to-gray-100"
         )}
       >
+        <IOSFix />
         <Sidebar />
-        <div className="lg:pl-3 lg:pt-3 bg-transparent flex-1 w-full overflow-y-auto">
-          <div className="flex-1 bg-white/90 min-h-screen w-full lg:rounded-tl-2xl border border-transparent lg:border-gray-200/60 lg:shadow-soft overflow-y-auto backdrop-blur-sm relative">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-blue-50/40 to-indigo-50/40 rounded-full blur-3xl -z-10 transform translate-x-1/4 -translate-y-1/4"></div>
-            <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-blue-50/40 to-purple-50/40 rounded-full blur-3xl -z-10 transform -translate-x-1/4 translate-y-1/4"></div>
+        <div className="lg:pl-3 lg:pt-3 bg-transparent flex-1 w-full  overflow-y-auto">
+          
             
             {children}
             <Footer />
-          </div>
+          
         </div>
       </body>
     </html>

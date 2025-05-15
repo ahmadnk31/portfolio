@@ -22,6 +22,51 @@ export const Sidebar = () => {
     setMounted(true);
   }, []);
   
+  // Control body overflow based on sidebar state
+  useEffect(() => {
+    if (mounted && isMobile()) {
+      if (open) {
+        // Get current scroll position
+        const scrollY = window.scrollY;
+        
+        // Add the custom body-scroll-lock class
+        document.body.classList.add('body-scroll-lock');
+        
+        // Set position fixed to prevent scrolling, maintain scroll position
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+      } else {
+        // Get the scroll position from the body's top value
+        const scrollY = document.body.style.top;
+        
+        // Remove the scroll lock class
+        document.body.classList.remove('body-scroll-lock');
+        
+        // Reset all styles we've applied
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        
+        // Restore scroll position
+        if (scrollY) {
+          window.scrollTo(0, Math.abs(parseInt(scrollY || '0')));
+        }
+      }
+    }
+    
+    return () => {
+      // Reset everything when component unmounts
+      document.body.classList.remove('body-scroll-lock');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+    };
+  }, [open, mounted]);
+  
   // Handle window resize
   useEffect(() => {
     // Function to handle responsive behavior with debounce
@@ -76,9 +121,9 @@ export const Sidebar = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             exit={{ x: -300, opacity: 0 }}
-            className="px-6 z-50 py-8 bg-white dark:bg-gray-900 max-w-[280px] w-full fixed lg:relative h-[100dvh] left-0 flex flex-col justify-between shadow-xl lg:shadow-none border-r border-gray-200/70 dark:border-gray-800/70 overflow-y-auto"
+            className="px-6 z-50 py-8 bg-white sticky top-0  dark:bg-gray-900 max-w-[280px] w-full fixed lg:relative h-[100dvh] left-0 flex flex-col justify-between shadow-xl lg:shadow-none border-r border-gray-200/70 dark:border-gray-800/70 overflow-auto"
           >
-            <div className="flex-1 overflow-auto scrollbar-hide">
+            <div className="flex-1 overflow-y-auto sticky top-0 -mr-2 pr-2">
               <div className="flex justify-between items-center lg:hidden">
                 <SidebarHeader />
                 <button 
@@ -103,8 +148,11 @@ export const Sidebar = () => {
       {/* Mobile toggle button */}
       <button
         className="fixed lg:hidden bottom-6 right-6 h-12 w-12 bg-blue-600 hover:bg-blue-700 text-white shadow-lg rounded-full flex items-center justify-center z-[100] transition-colors"
-        onClick={() => setOpen(!open)}
-        style={{ transform: 'translateZ(0)' }}
+        onClick={() => {
+          setOpen(!open);
+        }}
+        aria-label={open ? "Close menu" : "Open menu"}
+        style={{ transform: 'translateZ(0)', WebkitTapHighlightColor: 'transparent' }}
       >
         {open ? <IconX size={20} /> : <IconMenu2 size={20} />}
       </button>
@@ -130,7 +178,12 @@ export const Navigation = ({
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => isMobile() && setOpen(false)}
+              onClick={() => {
+                if (isMobile()) {
+                  // Just close sidebar, effect will handle the scroll restoration
+                  setOpen(false);
+                }
+              }}
               className={twMerge(
                 "text-gray-700 hover:text-gray-900 hover:bg-gray-100/70 transition-all duration-200 flex items-center space-x-3 py-2.5 px-3 rounded-md text-sm",
                 isActive(link.href) && "bg-blue-50 text-blue-700 font-medium"

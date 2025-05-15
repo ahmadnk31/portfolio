@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <Container>
+    <div className="overflow-x-hidden">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
         <div className="md:max-w-xl">
           <span className="text-4xl">👋</span>
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
         </div>
         
-        <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto md:mx-0 mt-6 md:mt-0">
+        <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto md:mx-0 mt-6 md:mt-0 overflow-visible">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full"></div>
           <div className="absolute inset-4 bg-blue-600 opacity-10 rounded-full"></div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -87,6 +87,6 @@ export default function Home() {
           Contact Me
         </a>
       </div>
-    </Container>
+    </div>
   );
 }

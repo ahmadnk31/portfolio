@@ -105,3 +105,29 @@ export async function uploadToS3(
 export function getS3URL(key: string) {
   return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
 }
+
+// Verify an email address with SES
+export async function verifyEmailAddress(emailAddress: string) {
+  try {
+    console.log(`Attempting to verify email address: ${emailAddress}`);
+    
+    const result = await sesClient.verifyEmailIdentity({
+      EmailAddress: emailAddress
+    });
+    
+    console.log(`Verification initiated for: ${emailAddress}`);
+    console.log(`Verification result:`, result);
+    
+    return {
+      success: true,
+      message: `Verification email has been sent to ${emailAddress}. Please check your inbox and follow the instructions to complete verification.`
+    };
+  } catch (error) {
+    console.error('Error verifying email address:', error);
+    return {
+      success: false,
+      message: `Failed to verify email address: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      error
+    };
+  }
+}
