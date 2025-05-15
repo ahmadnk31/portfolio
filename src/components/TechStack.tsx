@@ -49,23 +49,32 @@ export const TechStack = () => {
     },
   ];
   return (
-    <div>
-      <Heading
-        as="h2"
-        className="font-black text-lg md:text-lg lg:text-lg mt-20 mb-4"
-      >
-        Tech Stack
-      </Heading>
-      <div className="flex flex-wrap">
+    <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-xl border border-gray-100 shadow-sm mt-12">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="h-8 w-1 bg-blue-600 rounded-full"></div>
+        <Heading
+          as="h2"
+          className="font-bold text-xl"
+        >
+          Technologies I Work With
+        </Heading>
+      </div>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
         {stack.map((item) => (
-          <Image
-            src={item.src}
+          <div 
             key={item.src}
-            width={`200`}
-            height={`200`}
-            alt={item.title}
-            className={twMerge("object-contain mr-4 mb-4", item.className)}
-          />
+            className="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          >
+            <Image
+              src={item.src}
+              width={`100`}
+              height={`100`}
+              alt={item.title}
+              className={twMerge("object-contain h-12 mb-3", item.className)}
+            />
+            <span className="text-sm font-medium text-gray-700">{item.title}</span>
+          </div>
         ))}
       </div>
     </div>

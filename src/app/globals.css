@@ -3,71 +3,73 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --header-height: 4rem;
-  }
+    :root {
+        --header-height: 4rem;
+    }
 
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply bg-white dark:bg-gray-950;
-  }
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-white dark:bg-gray-950;
+    }
 }
 
 /* Modern scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-900;
+    @apply bg-gray-100 dark:bg-gray-900;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-blue-500/50 rounded-full hover:bg-blue-600/50 transition-colors;
+    @apply bg-blue-500/50 rounded-full hover:bg-blue-600/50 transition-colors;
 }
 
 /* Gradient animations */
 .bg-gradient-animation {
-  background-size: 200% 200%;
-  animation: gradientAnimation 15s ease infinite;
+    background-size: 200% 200%;
+    animation: gradientAnimation 15s ease infinite;
 }
 
 @keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Glass morphism effect */
 .glass {
-  @apply backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-800/30;
+    @apply backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-800/30;
 }
 
 /* Card hover effects */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
 }
 
 /* Button styles */
 .btn-primary {
-  @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-all duration-200 inline-flex items-center gap-2;
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-all duration-200 inline-flex items-center gap-2;
 }
 
 .btn-secondary {
-  @apply bg-white hover:bg-gray-100 text-gray-800 border border-gray-300 px-6 py-3 rounded-md font-medium transition-all duration-200 inline-flex items-center gap-2;
+    @apply bg-white hover:bg-gray-100 text-gray-800 border border-gray-300 px-6 py-3 rounded-md font-medium transition-all duration-200 inline-flex items-center gap-2;
 }
 
 /* Form input styles */
 .form-input {
-  @apply bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-400 px-4 py-3 rounded-md text-sm text-neutral-700 w-full transition-all duration-200;
+    @apply bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-400 px-4 py-3 rounded-md text-sm text-neutral-700 w-full transition-all duration-200;
 }

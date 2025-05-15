@@ -86,7 +86,7 @@ export const Contact = () => {
   };
   
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form w-full max-w-2xl mx-auto" onSubmit={handleSubmit}>
       <div className="flex flex-col md:flex-row justify-between gap-5">
         <div className="w-full">
           <input
@@ -161,21 +161,21 @@ export const Contact = () => {
       </div>
       
       {status === "error" && (
-        <div className="mt-4 flex items-center gap-2 text-red-500 bg-red-50 p-3 rounded-md">
-          <IconAlertTriangle size={20} />
+        <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-red-500 bg-red-50 p-3 rounded-md">
+          <IconAlertTriangle size={20} className="flex-shrink-0 mt-1 sm:mt-0" />
           <span className="text-sm">{errorMessage}</span>
         </div>
       )}
       
       {status === "success" && (
-        <div className="mt-4 flex items-center gap-2 text-green-600 bg-green-50 p-3 rounded-md">
-          <IconCheck size={20} />
-          <span className="text-sm">Your message has been sent successfully! I'll get back to you soon.</span>
+        <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-green-600 bg-green-50 p-3 rounded-md">
+          <IconCheck size={20} className="flex-shrink-0 mt-1 sm:mt-0" />
+          <span className="text-sm">Your message has been sent successfully! I&apos;ll get back to you soon.</span>
         </div>
       )}
       
       <button
-        className={`w-full px-4 py-3 mt-5 rounded-md font-semibold flex justify-center items-center gap-2 transition-all duration-200 ${
+        className={`w-full md:max-w-xs mx-auto px-4 py-3 mt-5 rounded-md font-semibold flex justify-center items-center gap-2 transition-all duration-200 ${
           status === "loading" 
             ? "bg-blue-400 cursor-not-allowed text-white" 
             : "bg-blue-600 hover:bg-blue-700 text-white"

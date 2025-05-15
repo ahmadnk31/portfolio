@@ -40,21 +40,30 @@ export default async function BlogPage() {
 
   return (
     <Container>
-      <span className="text-4xl">📝</span>
-      <Heading className="font-black pb-2">Insights & Articles</Heading>
-      <Paragraph className="pb-6 max-w-2xl">
-        I share my knowledge about <Highlight>cloud architecture</Highlight>, web development, 
-        and building scalable applications. Here you'll find practical insights from my experience
-        as an <Highlight>AWS certified architect</Highlight>.
-      </Paragraph>
-      
-      {allBlogs.length > 0 ? (
-        <Blogs blogs={allBlogs} />
-      ) : (
-        <div className="text-center py-16">
-          <p className="text-gray-500">No articles found. Check back soon!</p>
+      <div className="relative">
+        {/* Background decorative elements */}
+        <div className="absolute -top-20 right-0 w-80 h-80 bg-blue-50/50 rounded-full blur-3xl -z-10"></div>
+        
+        <div className="mb-12">
+          <span className="inline-block p-3 bg-blue-50 text-blue-600 rounded-xl mb-4">📝</span>
+          <Heading className="font-black text-3xl md:text-4xl mb-4">Insights & Knowledge</Heading>
+          <Paragraph className="pb-6 max-w-2xl text-lg">
+            I share my expertise about <Highlight>cloud architecture</Highlight>, web development, 
+            and building scalable applications. Here you&apos;ll find practical insights from my experience
+            as an <Highlight>AWS certified architect</Highlight>.
+          </Paragraph>
         </div>
-      )}
+        
+        {allBlogs.length > 0 ? (
+          <Blogs blogs={allBlogs} />
+        ) : (
+          <div className="text-center py-16 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div className="text-5xl mb-4">📚</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Articles Coming Soon</h3>
+            <p className="text-gray-500">I&apos;m currently working on new content. Check back soon!</p>
+          </div>
+        )}
+      </div>
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import { Blog } from "@/types/blog";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { formatDate } from "../../lib/formatDate";
 import { useState } from "react";
@@ -26,11 +27,12 @@ export const ArticlePreview = ({ articles }: { articles: Blog[] }) => {
               : { y: 0 }
             }
             transition={{ duration: 0.2 }}
-          >
-            <div className="relative h-48 w-full">
-              <img 
+          >            <div className="relative h-48 w-full">
+              <Image 
                 src={article.image} 
                 alt={article.title}
+                width={600}
+                height={300}
                 className="h-full w-full object-cover"
               />
             </div>

@@ -22,16 +22,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={twMerge(
           inter.className,
-          "flex antialiased h-screen overflow-hidden bg-gray-100"
+          "flex antialiased h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100"
         )}
       >
         <Sidebar />
-        <div className="lg:pl-2 lg:pt-2 bg-gray-100 flex-1 overflow-y-auto">
-          <div className="flex-1 bg-white min-h-screen lg:rounded-tl-xl border border-transparent lg:border-neutral-200 overflow-y-auto">
+        <div className="lg:pl-3 lg:pt-3 bg-transparent flex-1 overflow-y-auto">
+          <div className="flex-1 bg-white/90 min-h-screen lg:rounded-tl-2xl border border-transparent lg:border-gray-200/60 lg:shadow-soft overflow-y-auto backdrop-blur-sm relative">
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-blue-50/40 to-indigo-50/40 rounded-full blur-3xl -z-10 transform translate-x-1/4 -translate-y-1/4"></div>
+            <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-blue-50/40 to-purple-50/40 rounded-full blur-3xl -z-10 transform -translate-x-1/4 translate-y-1/4"></div>
+            
             {children}
             <Footer />
           </div>

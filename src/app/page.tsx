@@ -4,6 +4,7 @@ import { Highlight } from "@/components/Highlight";
 import { Paragraph } from "@/components/Paragraph";
 import { Products } from "@/components/Products";
 import { TechStack } from "@/components/TechStack";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -43,10 +44,13 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full"></div>
           <div className="absolute inset-4 bg-blue-600 opacity-10 rounded-full"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <img 
+            <Image 
               src="/images/ahmadullah.png" 
               alt="Ahmadullah Nekzad" 
+              width={288}
+              height={288}
               className="rounded-full w-56 h-56 md:w-72 md:h-72 object-cover border-4 border-white shadow-lg"
+              priority
             />
           </div>
         </div>
@@ -70,10 +74,10 @@ export default function Home() {
       
       <div className="mt-24 bg-gradient-to-br from-blue-50 to-neutral-50 p-8 rounded-xl border border-neutral-100">
         <Heading as="h2" className="font-black text-xl md:text-2xl mb-4">
-          Let's Build Something Amazing Together
+          Let&apos;s Build Something Amazing Together
         </Heading>
         <Paragraph className="mb-6">
-          I'm always interested in hearing about new projects and opportunities. 
+          I&apos;m always interested in hearing about new projects and opportunities. 
           If you have a project in mind or just want to chat, feel free to reach out!
         </Paragraph>
         <a 
